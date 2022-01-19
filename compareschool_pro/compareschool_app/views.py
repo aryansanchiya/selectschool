@@ -1,17 +1,30 @@
-from django.shortcuts import render
-from .models import Fees, SchoolDetail, Staff, Fees
+import re
+from django.core.checks import messages
+from django.db import connection
+from django.shortcuts import redirect, render
+from .models import  Fees, SchoolDetail, Staff, Fees, User
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
 
 # Create your views here.
 
 def index(request):
-    return render(request, "Home.html")
+    detail = SchoolDetail.objects.all().order_by('-Date')
+    school = SchoolDetail.objects.count()
+    return render(request, "Home.html",{'detail':detail, 'school':school})
 
 def about(request):
-    return render(request, "about.html")
+    school = SchoolDetail.objects.count()
+    return render(request, "about.html",{'school':school})
 
 def schools(request):
-    school = SchoolDetail.objects.all()
-    return render(request,'schools.html',{'school':school})
+    if not 'userid' in request.session:
+        # messages.success(request, 'Login Required')
+        return redirect("login")
+    else:
+        school = SchoolDetail.objects.all()
+        
+        return render(request,'schools.html',{'school':school})
 
 def contact(request):
     return render(request,'contact.html')
@@ -31,3 +44,61 @@ def fees(request,id):
 def city(request,city):
     citydetail = SchoolDetail.objects.filter(City=city)
     return render(request,'city.html',{'citydetail': citydetail})
+
+def login(request):
+    if request.method == "POST":
+        email = request.POST["txtemail"]
+        user_given_password = request.POST["txtpassword"]
+        count = User.objects.filter(email=email).count()
+        if count == 1 :
+            hashed_password = User.objects.only("password").get(email=email).password
+            try:
+                password_hasher = PasswordHasher()
+                if password_hasher.verify(hashed_password, user_given_password) == True:
+                    id = User.objects.only("id").get(email=email).id
+                    request.session["userid"] = id
+                    return redirect("/")
+            except VerifyMismatchError:
+                return render(request, "login.html", {"message" : "Invalid Email id or Password"})
+        else:
+            return render(request, "login.html",{"message" : "Invalid Email id or Password"})
+    else:
+        if not 'message' in request.session:
+            return render(request, 'login.html')
+        else:
+            message = request.session["message"]
+            del request.session["message"]
+            return render(request,'login.html',{'message':message})
+
+
+def register(request):
+    if request.method == "POST":
+        email = request.POST['txtemail']
+        mobile = request.POST['txtmobile']
+        password = request.POST['txtpassword']
+        confirm_password = request.POST['txtconfirmpassword']
+        if password != confirm_password:
+            return render(request, "register.html",{"message" : "Confirm Password does not match to the Password."})
+        else:
+            email_count = User.objects.filter(email=email).count()
+            mobile_count = User.objects.filter(mobile=mobile).count()
+            if email_count>=1 or mobile_count>=1:
+                return render(request, "register.html", {'message' : 'Email or Mobile is already registered with us!'})
+            else:
+                password_hasher = PasswordHasher()
+                hashed_password = password_hasher.hash(password)
+                with connection.cursor() as cursor:
+                    cursor.execute("insert into compareschool_app_user (email,password,mobile) values (%s,%s,%s)", [email, hashed_password, mobile])
+                    cursor.close()
+                    request.session["message1"] = "Register Successfully"
+                # messages.success(request, 'Register Successfully')
+                return redirect("login")
+    return render(request, "register.html")    
+
+
+
+def logout(request):
+    if 'userid' in request.session:
+        del request.session['userid']
+    return redirect('/')
+        

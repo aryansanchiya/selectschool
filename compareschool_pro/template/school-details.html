@@ -10,6 +10,7 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <script src="https://kit.fontawesome.com/cba185e733.js" crossorigin="anonymous"></script>  
   <!-- Favicons -->
   <link href="{% static 'theme/assets/img/favicon.png' %}" rel="icon">
   <link href="{% static 'theme/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
@@ -63,9 +64,113 @@
   }
 }
 .img-fluid{
-  height: 100%;
-  width: auto;
+  height: auto;
+  width: 100%;
+  
 }
+.column {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+      
+.column img {
+  width: 100%;
+  transition: 0.5s all ease-in-out;
+}
+      
+.column:hover img { 
+  transform: scale(1.7);
+}
+.icon:hover{
+  transform: scale(1.2);
+}
+.box:hover{
+  position: relative;
+  display: block;
+
+  /* background: #000; */
+  /* width: 1200px; */
+  /* height: 300px; */
+  /* margin: 240px auto; */
+}
+
+.container .box{
+  text-align: center;
+  position: relative;
+  width: calc(300px - 30px);
+  height: calc(250px - 30px);
+  background: black;
+  float: left;
+  margin: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 10px;
+  
+}
+.container .box2{
+  text-align: center;
+  position: relative;
+  width: calc(400px - 30px);
+  height: calc(250px - 30px);
+  background: black;
+  float: left;
+  margin: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 10px;
+  
+}
+.container .box .icon{
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background:lightgreen;
+  transition: 0.5s;
+  z-index: 1;
+}
+.container .box2 .icon{
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background:lightgreen;
+  transition: 0.5s;
+  z-index: 1;
+}
+.container .box .icon .fab{
+  width: 100%;
+  height: 100%;
+}
+.center{
+  text-align: center;
+  width: 100%;
+  padding-top: 10px;
+}
+.icon{
+  padding-top: 20px;
+  text-align: center;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 120%;
+}
+.text{
+    font-size: 16px;
+    text-transform:uppercase;
+    padding-top: 15px;
+    text-align:center;
+    font-family:sans-serif;
+    font-weight: 900px;
+}
+.t2{
+  font-size: 13px;
+  font-style: italic;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 </style>
 <body>
 
@@ -106,11 +211,11 @@
       <div class="container" data-aos="fade-up">
 
         <div class="row">
-          <div class="col-lg-8">
+          <div class="col-lg-6">
             <img src="http://127.0.0.1:8000/media/{{ detail.Image1 }}" class="img-fluid" alt="">
           </div>
-          <div class="col-lg-4">
-
+          <div class="col-lg-6">
+            <br>
             <div class="course-info d-flex justify-content-between align-items-center">
               <h5>School Name</h5>
               <p>{{ detail.Name }}</p>
@@ -132,11 +237,6 @@
             </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
-              <h5>Hostel</h5>
-              <p>{{ detail.Hostel }}</p>
-            </div>
-
-            <div class="course-info d-flex justify-content-between align-items-center">
               <h5>Mobile No</h5>
               <p>{{ detail.Mobile_No }}</p>
             </div>
@@ -155,20 +255,156 @@
         </div>
         <br>
         <hr>
-        <h2>Images:-</h2>
         <br>
         <br>
-        <div class="row">
-          <div class="column">
-            <img src="http://127.0.0.1:8000/media/{{ detail.Image2 }}" alt="Snow" style="width:80%">
-          </div>
-          <div class="column">
-            <img src="http://127.0.0.1:8000/media/{{ detail.Image3 }}" alt="Forest" style="width:80%">
-          </div>
-          <div class="column">
-            <img src="http://127.0.0.1:8000/media/{{ detail.Image5 }}" alt="Mountains" style="width:80%">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title">
+        <h2>Images</h2>
+      </div>
+      <div class="col-sm col-md-6 col-lg-12  ftco-animate ">
+        <div class="container boxes">
+          <div class="row">
+            <div class="column">
+              <img src="http://127.0.0.1:8000/media/{{ detail.Image2 }}" alt="Snow" style="width:100%">
+            </div>
+            <div class="column">
+              <img src="http://127.0.0.1:8000/media/{{ detail.Image3 }}" alt="Forest" style="width:100%">
+            </div>
+            <div class="column">
+              <img src="http://127.0.0.1:8000/media/{{ detail.Image5 }}" alt="Mountains" style="width:100%">
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+        <br>
+        <hr>
+        <br>
+        <section id="popular-facilities d-flex" class="courses ftco-section">
+          <div class="container" data-aos="fade-up">
+            <div class="section-title">
+              <h2>Provided Facilities</h2>
+            </div>
+            <!-- <div class="row" data-aos="zoom-in" data-aos-delay="100"> -->
+            
+              <div class="col-sm col-md-6 col-lg-12  ftco-animate ">
+                <div class="container boxes">
+                    <br>
+                    <div class="container">
+                        {%if detail.Auditorium == "yes"%}
+                        <div class="box">
+                          <div class="icon"><i class="far fa-building fa-4x center"></i><div class="text">Auditorium</div>
+                        </div>
+                        {% endif %}
+                        </div>
+                        {%if detail.Infirmary == "yes"%}
+                        <div class="box">
+                          <div class="icon"><i class="fas fa-clinic-medical fa-4x center"></i><div class="text">Infirmary</div></div>
+                        </div>
+                        {% endif %}
+
+                        {%if detail.Computer_lab == "yes"%}
+                        <div class="box">
+                          <div class="icon"><i class="fas fa-laptop-code fa-4x center"></i><div class="text">Computer Lab</div></div>
+                        </div>
+                        {% endif %}
+                    
+                        {%if detail.Science_lab == "yes"%}
+                        <div class="box">
+                          <div class="icon"><i class="fas fa-flask fa-4x center"></i><div class="text">Science Lab</div></div>
+                        </div>
+                        {% endif %}
+
+                        {%if detail.Library == "yes"%}
+                        <div class="box">
+                          <div class="icon"><i class="fas fa-book-reader fa-4x center"></i><div class="text">Library</div></div>
+                        </div>
+                        {% endif %}
+
+                        {%if detail.Cafeteria == "yes"%}
+                        <div class="box">
+                          <div class="icon"><i class="fas fa-coffee fa-4x center"></i><div class="text">Canteen</div></div>
+                        </div>
+                        {% endif %}
+
+                        {%if detail.Hostel == "yes"%}
+                        <div class="box">
+                          <div class="icon"><i class="fas fa-home fa-4x center"></i><div class="text">Hostel</div></div>
+                        </div>
+                        {% endif %}
+                      
+                        {%if detail.Transportation == "yes"%}
+                        <div class="box">
+                          <div class="icon"><i class="fas fa-bus fa-4x center"></i><div class="text">Transportation</div></div>
+                        </div>
+                        {% endif %}
+                    </div>
+                  </div> <!-- End Course Item-->
+                </div>
+              </div>
+          </section>
+          <section id="popular-activites d-flex" class="courses ftco-section">
+            <div class="container" data-aos="fade-up">
+              <div class="section-title">
+                <h2>Provided Activites</h2>
+              </div>
+              <!-- <div class="row" data-aos="zoom-in" data-aos-delay="100"> -->
+              
+                <div class="col-sm col-md-6 col-lg-12  ftco-animate ">
+                  <div class="container boxes">
+                      <br>
+                      <div class="container">
+                          <div class="box2">
+                            <div class="icon"><i class="fas fa-users fa-3x center"></i>
+                              <div class="text">Social Activites</div>
+                              <div class="t2">
+                                {{detail.Social_Developement}}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="box2">
+                            <div class="icon"><i class="fas fa-campground fa-3x center"></i>
+                              <div class="text">Picnic-Excursions</div>
+                              <div class="t2">
+                                {{detail.Picnic_Excursions}}
+                              </div>
+                            </div>
+                          </div>
+  
+                          <div class="box2">
+                            <div class="icon"><i class="fas fa-futbol fa-3x center"></i>
+                              <div class="text">Physical Activites</div>
+                              <div class="t2">
+                                {{detail.Physical}}
+                              </div>
+                            </div>
+                          </div>
+                      
+                          <div class="box2">
+                            <div class="icon"><i class="fas fa-asterisk fa-3x center"></i>
+                              <div class="text">Cultural Activites</div>
+                              <div class="t2">
+                                {{detail.Cultural}}
+                              </div>
+                            </div>
+                          </div>
+  
+                          <div class="box2">
+                            <div class="icon"><i class="fas fa-shapes fa-3x center"></i>
+                              <div class="text">Art & Crafts</div>
+                              <div class="t2">
+                                {{detail.Arts_Crafts}}
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                    </div> <!-- End Course Item-->
+                  </div>
+                </div>
+            </section>
+           
+         
     </section><!-- End Cource Details Section -->
     
 

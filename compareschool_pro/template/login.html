@@ -90,6 +90,140 @@
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;} 
+    /*assign full width inputs*/
+    input[type=text],
+    input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        /* border: 1px solid #ccc; */
+        box-sizing: border-box;
+    }
+    
+    /*set a style for the buttons*/
+    .mybutton {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+    
+    /* set a hover effect for the button*/
+    button:hover {
+        opacity: 0.8;
+    }
+
+    
+    /*set padding to the container*/
+    .container {
+        padding: 16px;
+    }
+      
+    /*set the forgot password text*/
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+    
+    /*set the Modal background*/
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+    
+    /*style the model content box*/
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        border: 1px solid #888;
+        width: 80%;
+    }
+    
+    /*style the close button*/
+    .close {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+      
+    .close:hover,
+    .close:focus {
+        color: red;
+        cursor: pointer;
+    }
+    
+    /* add zoom animation*/
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+      
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+      
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
+        }
+        to {
+            transform: scale(1)
+        }
+    }
+      
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+        .cancelbtn {
+            width: 100%;
+        }
+    }
+    .form-control{
+    width: auto;
+    height: 100%;
+    /* border-color:darkgrey; */
+    border-width: 5px;
+    border-style:double;
+    /* box-shadow: darkgray; */
+    background-color:honeydew;
+    border-radius: 20px;
+    padding: 10px;
+    width: 100%;
+    transition: 0.5s all ease-in-out;
+    
+  }
+  .form-control:hover {
+    transform: scale(1.1);
+  }
+  .msg{
+    font-style: italic;
+    background-color:#4CAF50;
+    color: floralwhite;
+    
+  }
 </style>
 </head>
 
@@ -109,6 +243,21 @@
           <li><a href="about">About</a></li>
           <li><a class="active" href="schools">Schools</a></li>
           <li><a href="contact">Contact</a></li>
+          
+          
+          <!-- <li class="dropdown"><a href="#">City<i class="bi bi-chevron-down"></i></i></a>
+            <ul>
+              {% for row in school %}
+                <a href="city/{{row.City}}">{{ row.City }}</a>
+              {% endfor %}
+            </ul>
+          </li> -->
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      <!-- <a href="courses.html" class="get-started-btn">Get Started</a> -->
+
     </div>
   </header><!-- End Header -->
 
@@ -117,7 +266,7 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
       <div class="container">
-        <h2>Schools</h2>
+        <h2>Login</h2>
         <p></p>
       </div>
     </div><!-- End Breadcrumbs -->
@@ -126,33 +275,44 @@
      <section id="popular-courses d-flex" class="courses ftco-section">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>Schools</h2>
+          <h2>Login</h2>
         </div>
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-        <!-- {% if City == city %} -->
-          {% for row in citydetail %}
-          <div class="col-sm col-md-6 col-lg-3  ftco-animate ">
-            <div class="course-item">
-              <a href="#">
-                <img src="http://127.0.0.1:8000/media/{{ row.Image1 }}" class="img-fluid image-popup" alt="...">
-              </a>
-              <div class="course-content">
-                <br>
-                <hr class= "border border-dark">
-                <h3><a href="/details/{{row.id}}">{{ row.Name }}</a></h3> <!--school name!-->
-                <h7><a class="text-dark" href="/fees/{{row.id}}">Fees Detail</a></h7>
-                <br>
-                <br>
-                <p>Phone no:- {{ row.Phone_No }}</p> <!--mail address or phone no!-->
-                <hr class= "border border-dark">
-                <p>{{ row.Email }}</p> 
+        <div class="container">
+          <div class="row justify-content-center">
+              <div class="col-xl-8 ftco-animate">
+                  <form action="" method="post" class="billing-form bg-light p-3 p-md-5 modal-content animate">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-12">
+                          <!-- {{ message }} -->
+                        </div>
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                  <label for="txtemail">Email</label>
+                                  <input type="email" class="form-control" placeholder="Registered Email Addresss" required name="txtemail" >
+                                  <br>
+                              </div>
+                          </div>
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                  <label for="txtpassword">Password</label>
+                                  <input type="password" class="form-control" placeholder="Password" required name="txtpassword">
+                              </div>
+                          </div>
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                  <input type="submit" class="mybutton" value="Login" value="">
+                              </div>
+                          </div>
+                          <div class="col-12 msg">
+                              {{ message }}
+                          </div>
+                      </div>
+                  </form>
               </div>
-            </div>
-          </div> <!-- End Course Item-->
-          {% endfor %}
-        <!-- {% endif %} -->
-        </div>
+          </div>
       </div>
+    </div>
     </section>
   </main><!-- End #main -->
 

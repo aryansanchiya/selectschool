@@ -10,4 +10,8 @@ urlpatterns = [
     path('staff/<int:id>',views.staff,name='staff'),
     path('fees/<int:id>',views.fees,name='fees'),
     path('city/<city>',views.city, name="city"),
+    path('login', views.login, name= 'login'),
+    path('register', views.register, name='register'),
+    # path('facalities/<int:id>',views.facalities, name="facalities"),
+    path('logout', views.logout, name= 'logout')
 ]

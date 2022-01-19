@@ -1,5 +1,8 @@
+from operator import mod
+from statistics import mode
 from django.db import models
 from django.db.models.base import Model
+
 
 # Create your models here.
 
@@ -19,6 +22,24 @@ class SchoolDetail(models.Model):
     Email = models.EmailField()
     Website = models.URLField(default=None)
     City = models.CharField(max_length=200)
+    Date = models.DateField()
+    # Facilities
+    Auditorium = models.CharField(max_length=200)
+    Infirmary = models.CharField(max_length=200)
+    Computer_lab = models.CharField(max_length=200)
+    Science_lab = models.CharField(max_length=200)
+    Library = models.CharField(max_length=200)
+    Cafeteria = models.CharField(max_length=200)
+    Hostel = models.CharField(max_length=200)
+    Transportation = models.CharField(max_length=200)
+    # activities
+    Social_Developement = models.CharField(max_length=255)
+    Picnic_Excursions = models.CharField(max_length=255)
+    Physical = models.CharField(max_length=255)
+    Cultural = models.CharField(max_length=255)
+    Arts_Crafts = models.CharField(max_length=255)
+    
+
 
     def __str__(self):
         return self.Name
@@ -44,4 +65,10 @@ class Fees(models.Model):
 
     def __str__(self):
         return self.Medium
+
+class User(models.Model):
+    email = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)
+    mobile = models.CharField(max_length=32)
+
    
