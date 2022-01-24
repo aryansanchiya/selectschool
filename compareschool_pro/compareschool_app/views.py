@@ -7,7 +7,7 @@ from django.db import connection
 from django.http import Http404, HttpResponse, response
 from django.shortcuts import redirect, render
 from platformdirs import os
-from .models import  Fees, Images, SchoolDetail, Staff, Fees, User
+from .models import  Fees, Images, Performance, SchoolDetail, Staff, Fees, User
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 
@@ -27,9 +27,9 @@ def schools(request):
         # messages.success(request, 'Login Required')
         return redirect("login")
     else:
-        school = SchoolDetail.objects.all()
-        
+        school = SchoolDetail.objects.all() 
         return render(request,'schools.html',{'school':school})
+
 
 def searchbar(request):
     if request.method == 'GET':
@@ -40,9 +40,10 @@ def searchbar(request):
 def contact(request):
     return render(request,'contact.html')
 
-def details(request, id):
+def details(request, id, performanceid):
     detail = SchoolDetail.objects.get(id=id)
-    return render(request,'school-details.html',{'detail':detail})
+    performance = Performance.objects.filter(PerformanceSchoolName__id=performanceid)
+    return render(request,'school-details.html',{'detail':detail,'performance' : performance})
 
 def staff(request,id):
     staffdetail = Staff.objects.filter(SchoolName__id=id)

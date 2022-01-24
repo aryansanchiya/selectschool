@@ -50,10 +50,6 @@ class SchoolDetail(models.Model):
     
     # Public Or Private
     Sector = models.CharField(max_length=100)
-
-    # Performance
-    
-    
     
     def __str__(self):
         return self.Name
@@ -103,6 +99,14 @@ class Images(models.Model):
     Sports3 = models.ImageField(upload_to="media/pics")
     Sports4 = models.ImageField(upload_to="media/pics") 
     Sports5 = models.ImageField(upload_to="media/pics") 
+
+class Performance(models.Model):
+    PerformanceSchoolName = models.ForeignKey(SchoolDetail, on_delete=models.CASCADE, related_name="PerformanceSchoolName")
+    From_Year = models.IntegerField()
+    To_Year = models.IntegerField()
+    Commerce_Per = models.IntegerField()
+    Sciece_per = models.IntegerField()
+    Performance = models.TextField()
 
 class User(models.Model):
     email = models.CharField(max_length=255)
