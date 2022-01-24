@@ -1,8 +1,13 @@
-import re
+import mimetypes
+# from msilib.schema import File
+from os import path
+from tokenize import Name
 from django.core.checks import messages
 from django.db import connection
+from django.http import Http404, HttpResponse, response
 from django.shortcuts import redirect, render
-from .models import  Fees, SchoolDetail, Staff, Fees, User
+from platformdirs import os
+from .models import  Fees, Images, SchoolDetail, Staff, Fees, User
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 
@@ -26,6 +31,12 @@ def schools(request):
         
         return render(request,'schools.html',{'school':school})
 
+def searchbar(request):
+    if request.method == 'GET':
+        search = request.GET.get('search/')
+        post1 = SchoolDetail.objects.all().filter(City=search)
+        return render(request, 'searchbar.html',{'post1':post1})
+
 def contact(request):
     return render(request,'contact.html')
 
@@ -44,6 +55,27 @@ def fees(request,id):
 def city(request,city):
     citydetail = SchoolDetail.objects.filter(City=city)
     return render(request,'city.html',{'citydetail': citydetail})
+
+def images(request,id):
+    schoolimages = Images.objects.filter(ImagesSchoolName__id=id)
+    return render(request,'images.html',{'schoolimages' : schoolimages})
+
+def download_file(id,request):
+    try:
+        file = SchoolDetail.objects.values_list('broucher',id=id)
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        filename = file
+        filepath = BASE_DIR + '/media/files/' +filename
+        path = open(filepath, 'rb')
+        mime_type, _= mimetypes.guess_type(filepath)
+        response = HttpResponse(path, content_type=mime_type)
+        response['Content-Disposition'] = "attachment; filename=%s" % filename
+        return response
+
+    except SchoolDetail.DoesNotExist:
+        raise Http404
+
+   
 
 def login(request):
     if request.method == "POST":

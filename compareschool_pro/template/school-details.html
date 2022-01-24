@@ -81,7 +81,7 @@
 }
       
 .column:hover img { 
-  transform: scale(1.7);
+  transform: scale(1.2);
 }
 .icon:hover{
   transform: scale(1.2);
@@ -221,36 +221,48 @@
               <p>{{ detail.Name }}</p>
             </div>
 
-            <div class="course-info  justify-content-between align-items-center">
-              <h5>Address</h5>
-              <p>{{ detail.Address }}</p>
-            </div>
-
-              <div class="course-info  justify-content-between align-items-center">
-              <h5>Achievements</h5>
-              <p>{{ detail.Achievements }}</p>
-            </div>
-
+            
             <div class="course-info d-flex justify-content-between align-items-center">
               <h5>Established</h5>
               <p>{{ detail.Established }}</p>
             </div>
-
+            
             <div class="course-info d-flex justify-content-between align-items-center">
               <h5>Mobile No</h5>
               <p>{{ detail.Mobile_No }}</p>
             </div>
+            
             <div class="course-info d-flex justify-content-between align-items-center">
               <h5>Phone No</h5>
               <p>{{ detail.Phone_No }}</p>
             </div>
+
             <div class="course-info d-flex justify-content-between align-items-center">
               <h5>Website</h5>
               <p>{{ detail.Website }}</p>
             </div>
-             <div class="course-info d-flex justify-content-between align-items-center ">
+
+            <div class="course-info d-flex justify-content-between align-items-center ">
               <a href="/staff/{{detail.id}}"><h5>Staff Detail</h5></a>
             </div>
+          </div>
+
+          <div class="course-info d-flex justify-content-between align-items-center ">
+            <a href="/download/{{detail.id}}/{{detail.Broucher}}"><h5>Broucher</h5></a>
+          </div>
+          
+          <div class="course-info  justify-content-between align-items-center">
+            <h5>Address</h5>
+            <p>{{ detail.Address }}</p>
+          </div>
+
+          <div class="course-info  justify-content-between align-items-center">
+            <h5>Achievements</h5>
+            <p>{{ detail.Achievements }}</p>
+          </div>
+          <div class="course-info  justify-content-between align-items-center">
+            <h5>Provided Board</h5>
+            <p>{{ detail.Board }}</p>
           </div>
         </div>
         <br>
@@ -274,6 +286,7 @@
               <img src="http://127.0.0.1:8000/media/{{ detail.Image5 }}" alt="Mountains" style="width:100%">
             </div>
           </div>
+          <a href="/images/{{detail.id}}">More Images <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
     </div>

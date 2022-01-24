@@ -40,12 +40,16 @@
     width: auto;
     height: 100%;
     border-color:darkgrey;
-    border-width: 5px;
+    border-width: 2px;
     border-style:double;
-    box-shadow: darkgray;
+    box-shadow:5px 7px 5px 8px gray;
     background-color:honeydew;
-    border-radius: 20px;
+    border-radius: 13px;
     padding: 10px;
+    transition: 0.5s all ease-in-out;
+  }
+  .course-item:hover {
+    transform: scale(1.1);
   }
   dropbtn {
   background-color: #04AA6D;
@@ -90,6 +94,7 @@
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;} 
+
 </style>
 </head>
 
@@ -102,7 +107,6 @@
       <h1 class="logo me-auto"><a href="index.html">Compare School</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a href="/">Home</a></li>
@@ -110,12 +114,15 @@
           <li><a class="active" href="schools">Schools</a></li>
           <li><a href="contact">Contact</a></li>
           
-          
-          <li class="dropdown"><a href="#">City<i class="bi bi-chevron-down"></i></i></a>
-            <ul>
-              {% for row in school %}
-                <a href="city/{{row.City}}">{{ row.City }}</a>
-              {% endfor %}
+          <!-- CITY FEATURE -->
+          <!-- <li class="dropdown"><a href="#">City<i class="bi bi-chevron-down"></i></i></a> -->
+            <!-- <ul>  
+              {% for row in school %} -->
+              <!-- {% if row.City == row.City %} -->
+                <!-- <a href="city/{{row.City}}">{{ row.City }}</a> -->
+              <!-- {% endif %} -->
+              <!-- {% endfor %} -->
+          <!-- END OF THE CITY FEATURE -->
             </ul>
           </li>
         </ul>
@@ -133,6 +140,13 @@
     <div class="breadcrumbs">
       <div class="container">
         <h2>Schools</h2>
+        <div class="wrapper">
+          <form action="{% url 'searchbar' %}" method="get">
+            <input type="text" name="search/" placeholder="Search by the Name of school or City">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </div>
         <p></p>
       </div>
     </div><!-- End Breadcrumbs -->
@@ -147,9 +161,14 @@
           {% for row in school %}
           <div class="col-sm col-md-6 col-lg-3  ftco-animate ">
             <div class="course-item">
+              <div class="ribbon">
+                  <span>{{row.Sector}}</span>
+              </div>
+              
               <a href="details/{{row.id}}">
                 <img src="http://127.0.0.1:8000/media/{{ row.Image1 }}" class="img-fluid image-popup" alt="...">
               </a>
+
               <div class="course-content">
                 <br>
                 <hr class= "border border-dark">
@@ -161,6 +180,7 @@
                 <hr class= "border border-dark">
                 <p>{{ row.Email }}</p> 
               </div>
+              
             </div>
           </div> <!-- End Course Item-->
           {% endfor %}

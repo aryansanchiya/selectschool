@@ -1,5 +1,5 @@
 from django.contrib import admin
-from compareschool_app.models import  SchoolDetail,Staff,Fees, User
+from compareschool_app.models import  Images, SchoolDetail,Staff,Fees, User
 from django.utils.html import format_html
 # Register your models here.
 
@@ -29,10 +29,10 @@ class StaffAdmin(admin.ModelAdmin):
 
 @admin.register(Fees)
 class FeesAdmin(admin.ModelAdmin):
-    list_display = ('Standard','Medium','Batch','Fees')
-    search_fields = ('Standard','Medium')
+    list_display = ['FeesSchoolName','Standard','Batch','Medium']
+    search_fields = ['FeesSchoolName']
     list_filter = ('Standard','Medium','Batch')
-    list_display_links = ['Standard']
+    list_display_links = ['FeesSchoolName']
     list_per_page = 10
 
 @admin.register(User)
@@ -41,11 +41,11 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ['email']
     list_display_links = ['email']
     
-# @admin.register(Facalities)
-# class FacalitiesAdmin(admin.ModelAdmin):
-#     list_display = ['SchoolName']
-#     search_fields = ['SchoolName']
-#     list_display_links = ['SchoolName']
+@admin.register(Images)
+class ImagesAdmin(admin.ModelAdmin):
+    list_display = ['ImagesSchoolName']
+    search_fields = ['ImagesSchoolName']
+
 
 
 
