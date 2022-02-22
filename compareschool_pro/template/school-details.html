@@ -170,8 +170,13 @@
   font-style: italic;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-
+.tab-content .performance-italic{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 20px;
+  font-style: italic;
+  color: gray;
+  text-shadow: lightgreen 2px 1px 1px;
+}
 
 </style>
 <body>
@@ -287,7 +292,8 @@
                 <div class="tab-pane active show">
                   <div class="row">
                     <div class="col-lg-8 details order-2 order-lg-1">
-                      <p class="performance-italic">{{row.Performance}}</p>
+                      <p class="performance-italic">From year {{row.From_Year}} to year {{ row.To_Year }}, In These 5 years {{row.PerformanceSchoolName}}'s Science Stream's performance is {{row.Sciece_per}}% and Commerce Stream's performance is {{row.Commerce_Per}}%. 
+                        We hope that this ratio of five years performance will be helpful for your higher standards. </p>
                       <br>
                       <br>
                     </div>
@@ -449,6 +455,40 @@
                   </div>
                 </div>
             </section>
+            <hr>
+            <br>
+            {% for row in admission %}
+            {% if row.Open_Admission == 'yes' %}
+            <section id="cource-details-tabs" class="cource-details-tabs">
+              <div class="container aos-init aos-animate" data-aos="fade-up">
+                <div class="row performance-row">
+                  <div class="col-lg-3">
+                    <ul class="nav nav-tabs flex-column">
+                      <li class="nav-item">
+                        <a class="nav-link active show" data-bs-toggle="tab">Admission Open</a>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div class="col-lg-9 mt-4 mt-lg-0">
+                    <div class="tab-content">
+                      <div class="tab-pane active show">
+                        <div class="row">
+                          <div class="col-lg-8 details order-2 order-lg-1">
+                            <p class="performance-italic"> {{row.Admission_Info}} </p>
+                            <br>
+                            <a href="/admission_info/{{row.id}}">Admission Form</a>
+                            <br>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            {% endif %}
+            {% endfor %}
            
          
     </section><!-- End Cource Details Section -->

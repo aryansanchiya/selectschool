@@ -1,5 +1,5 @@
 from django.contrib import admin
-from compareschool_app.models import  Images, Performance, SchoolDetail,Staff,Fees, User
+from compareschool_app.models import  Admission, Admission_Form, Images, Performance, SchoolDetail,Staff,Fees, User
 from django.utils.html import format_html
 # Register your models here.
 
@@ -50,6 +50,16 @@ class ImagesAdmin(admin.ModelAdmin):
 class PerformanceAdmin(admin.ModelAdmin):
     list_display = ['PerformanceSchoolName']
     search_fields = ['PerformanceSchoolName']
+
+@admin.register(Admission)
+class AdmissionAdmin(admin.ModelAdmin):
+    list_display = ['AdmissionSchoolName']
+    search_fields = ['AdmissionSchoolName']
+
+@admin.register(Admission_Form)
+class Admission_FormAdmin(admin.ModelAdmin):
+    list_display = ['First_Name','Last_Name','Email','DOB']
+    # search_fields = ['AdmissionformSchoolName']
 
 
 

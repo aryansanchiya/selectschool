@@ -231,7 +231,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
 .navbar .dropdown ul a i {
-  font-size: 12px;
+ font-size: 20px;
 }
 .navbar .dropdown ul a:hover, .navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover > a {
   color: #5fcf80;
@@ -1402,12 +1402,4 @@ section {
   border-right: 5px solid transparent;
   /* border-bottom: 5px solid; */
   
-}
-
-.tab-content .performance-italic{
-  font-size: 19px;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-  font-weight:bolder;
-  font-style: italic;
-  text-shadow: lightgreen 1px 0px 3px;
 }

@@ -5,6 +5,7 @@ from pyexpat import model
 from statistics import mode
 from tokenize import blank_re
 from django.db import models
+from pandas import notnull
 
 
 
@@ -106,9 +107,28 @@ class Performance(models.Model):
     To_Year = models.IntegerField()
     Commerce_Per = models.IntegerField()
     Sciece_per = models.IntegerField()
-    Performance = models.TextField()
+    # Performance = models.TextField()
+
+class Admission(models.Model):
+    AdmissionSchoolName = models.ForeignKey(SchoolDetail, on_delete=models.CASCADE, related_name= 'AdmissionSchoolName')
+    Open_Admission = models.CharField(max_length=50)
+    Admission_Info = models.TextField()
+
+class Admission_Form(models.Model):
+    AdmissionformSchoolName = models.CharField(max_length=255, null=True)
+    First_Name= models.CharField(max_length=200)
+    Last_Name = models.CharField(max_length=200)
+    Father_Name = models.CharField(max_length=200)
+    Email = models.EmailField(max_length=200)
+    DOB = models.DateField()
+    Std = models.IntegerField()
+    Std_Per = models.CharField(max_length=200)
+    Board = models.CharField(max_length=200)
+
 
 class User(models.Model):
+    firstname = models.CharField(max_length=255)
+    lastname = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     mobile = models.CharField(max_length=32)
